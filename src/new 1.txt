@@ -1,0 +1,186 @@
+//import React from 'react';
+//import ReactDOM from 'react-dom';
+//const myfirstelement = <h1>Hello React!...ssss...</h1>
+//ReactDOM.render(myfirstelement, document.getElementById('root'));
+
+import React, { Component } from 'react';
+//import React from 'react';
+import ReactDOM from 'react-dom';
+import './main.css';
+
+
+	var callGetAllUsersAPI = (userId)=>{
+        var myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+        var raw = JSON.stringify({"userId":userId});
+        var requestOptions = {
+            method: 'POST',
+            headers: myHeaders,
+            body: raw,
+            redirect: 'follow'
+            };
+			//alert(raw);
+            fetch("https://ohqt9x52g9.execute-api.us-west-2.amazonaws.com/dev", requestOptions)
+             .then(response => response.text())
+             .then(result => setGetAllUserData(JSON.parse(result).body))
+			 //.then(result => alert(JSON.parse(result).body))
+            .catch(error => alert(JSON.parse(error).body));
+        }
+
+		function setGetAllUserData(userData){
+            alert(userData);
+			
+			return {values:[{"city":"Fairfax3","displayName":"Trey3","email":"trey.hambrick@gmail.com","rstatus":" ","userId":"thambrick2"},
+			{"city":"Fairfax","displayName":"TreyHambrick4","email":"trey.hambrick@cox.net","rstatus":" ","userId":"thambrick4"},
+			{"city":"Fairfax","displayName":"Trey Hambrick","email":"trey.hambrick@cox.net","rstatus":" ","userId":"loginwithamazon_amzn1.account.ahg53tlglfhirgtzqtyrvbtcg4va"},{"city":"Miami","displayName":"Larry101","email":"trey.hambrick@cox.net","rstatus":" ","userId":"larry101"},{"city":"Fairfax3","displayName":"Trey Hambrick3","email":"trey.hambrick@cox.net","rstatus":" ","userId":"thambrick3"}],
+			"Count":5,"ScannedCount":5};
+		}
+		
+		
+//function onSelection(selection: any) {
+	//alert(selection);
+	//alert(JSON.parse(selection)); 
+//    alert(selection.name)
+    //handle selection
+//}
+
+var userList;
+var userId;
+var email;
+
+class Container extends React.Component {
+  constructor(props) {
+    super(props);
+	//let userId2 = document.cookie.replace(/(?:(?:^|.*;\s*)userId\s*\=\s*([^;]*).*$)|^.*$/, "$1"); 
+	//parent.iFrameWin = window;
+	//alert("in react, userId=");
+
+	//callGetAllUsersAPI("");
+	let params = window.location.search;
+	params = params.replace("?userid=", "");
+	params = "fwdwdwd";
+	//alert(params);
+	//this.state = setGetAllUserData("");
+	this.state = {values: []};
+
+	//window.location="https://www.stocklistnow.com/";
+	userId = params.substring(0, params.search("&email="));
+  }
+  
+    componentDidMount() {
+    this.UserList();
+  }
+
+  UserList() {
+    //$.getJSON('https://randomuser.me/api/')
+    //  .then(({ results }) => this.setState({ person: results }));
+	  
+        var myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+        var raw = JSON.stringify({"userId":userId});
+        var requestOptions = {
+            method: 'POST',
+            headers: myHeaders,
+            body: raw,
+            redirect: 'follow'
+            };
+			//alert(raw);
+            fetch("https://ohqt9x52g9.execute-api.us-west-2.amazonaws.com/dev", requestOptions)
+             .then(response => response.text())
+			 .then(result => this.setStateNow(JSON.parse(result).body))
+             //.then(result => this.setState(JSON.parse(result).body))
+			 //.then(result => alert(JSON.parse(result).body))
+            .catch(error => alert(JSON.parse(error).body));
+  }
+
+setStateNow(list){
+	alert(list);
+	//this.state = list;
+	this.state = {values:[{"city":"Fairfax3","displayName":"Trey3","email":"trey.hambrick@gmail.com","rstatus":" ","userId":"thambrick2"},
+			{"city":"Fairfax","displayName":"TreyHambrick4","email":"trey.hambrick@cox.net","rstatus":" ","userId":"thambrick4"},
+			{"city":"Fairfax","displayName":"Trey Hambrick","email":"trey.hambrick@cox.net","rstatus":" ","userId":"loginwithamazon_amzn1.account.ahg53tlglfhirgtzqtyrvbtcg4va"},{"city":"Miami","displayName":"Larry101","email":"trey.hambrick@cox.net","rstatus":" ","userId":"larry101"},{"city":"Fairfax3","displayName":"Trey Hambrick3","email":"trey.hambrick@cox.net","rstatus":" ","userId":"thambrick3"}],
+			"Count":5,"ScannedCount":5}
+}
+
+    updateProfile = () => {
+	//alert("updated Profile."); 
+    //alert(document.getElementById("displayName").value);	
+    //this.setState({show: false});
+		//let userId = document.cookie.replace(/(?:(?:^|.*;\s*)userId\s*\=\s*([^;]*).*$)|^.*$/, "$1"); 
+		if (!userId){ 
+		   alert("you must login before completing your profile"); 
+		   return false;
+		   }
+		
+		try {
+			//let userId = document.cookie.replace(/(?:(?:^|.*;\s*)userId\s*\=\s*([^;]*).*$)|^.*$/, "$1"); 
+			//alert("userId===");
+			//alert(userId);
+			let email = document.getElementById("email").value;
+			let displayName = document.getElementById("displayName").value;
+			let city = document.getElementById("city").value;
+			
+            var myHeaders = new Headers();
+            myHeaders.append("Content-Type", "application/json");
+            var raw = JSON.stringify({"userId":userId,"email":email,"displayName":displayName,"city":city});
+			//alert(raw);
+            var requestOptions = {
+                method: 'POST',
+                headers: myHeaders,
+                body: raw,
+                redirect: 'follow'
+            };
+			fetch("https://u3yyrwv2r5.execute-api.us-west-2.amazonaws.com/dev", requestOptions)
+             .then(response => response.text())
+			 //.then(result => alert(JSON.parse(result).body))
+			 .then(result => alert(JSON.parse(result).body))
+            .catch(error => alert(JSON.parse(error).body));
+		} catch (error) {
+			//console.error(error);
+			alert(error);
+		}
+		
+  }
+
+  
+   handleChange = (e) => {
+	//alert("wdwdwdw");
+	alert(e.target.value);
+    this.setState({selectedValue: e.target.value})
+  }
+  
+  render() {
+    let optionTemplate = this.state.values.map(v => (
+      <option value={v.userId}>{v.displayName}</option>
+    )); 
+    return (    
+	            <section id="yourProfile" class="wrapper style2 spotlights">
+                <div class="inner">
+				<center><h2><label id='profileTitle'>Adminstration</label></h2></center>
+				<form id='profileForm' method='post' >					
+				<table> 
+				<tr>
+				<td align='right'><label>User</label></td>
+				<td align='left' colspan='2' >
+        
+        <select value={this.state.value} onChange={this.handleChange}>
+          {optionTemplate}
+        </select>
+
+                </td>
+                </tr>
+				<tr><td align='right'><label>DisplayName</label></td><td><input type='text' id='displayName' onchange={this.handleChange}/></td></tr>
+				<tr><td align='right'><label>City</label></td><td><input type='text' id='city' onchange={this.handleChange}/></td></tr>
+                <tr><td align='right'><label>Email</label></td><td><input type='text' defaultValue={email} id='email' onchange={this.handleChange}/></td></tr>
+			    <tr><td colspan='2' align='center'>
+				<input type='button' value="Submit" id='updateProfile' onClick={this.updateProfile}/> </td></tr>
+			    </table>
+                </form>
+                </div>				
+				</section> 
+        );
+  }
+}
+
+
+ReactDOM.render(<Container />, document.getElementById('root'));

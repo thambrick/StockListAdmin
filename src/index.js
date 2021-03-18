@@ -189,8 +189,9 @@ class Container extends React.Component {
    handleChange = (e) => {
 	//alert("handleChange");
 	//alert(e.target.value);
+	this.setState({selectedValue: e.target.value})
 	this.CallGetUserAPI(e.target.value);
-    this.setState({selectedValue: e.target.value})
+    
   }
 
 /*

@@ -162,7 +162,7 @@ class Container extends React.Component {
 			fetch("https://u3yyrwv2r5.execute-api.us-west-2.amazonaws.com/dev", requestOptions)
              .then(response => response.text())
 			 //.then(result => alert(JSON.parse(result).body))
-			 .then(result => {wait('off');alert(JSON.parse(result).body)})
+			 .then(result => {alert(JSON.parse(result).body);wait('off');})
             .catch(error => alert(JSON.parse(error).body));
 		} catch (error) {
 			//console.error(error);
@@ -189,7 +189,7 @@ class Container extends React.Component {
    handleChange = (e) => {
 	//alert("handleChange");
 	//alert(e.target.value);
-	this.callGetUserAPI(e.target.value);
+	this.CallGetUserAPI(e.target.value);
     this.setState({selectedValue: e.target.value})
   }
 

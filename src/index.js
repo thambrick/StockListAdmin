@@ -7,7 +7,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './main.css';
-import waitImg from './images/wait.GIF';
+//import waitImg from './images/wait.GIF';
+import waitImg from './wait.GIF';
 
 //var userList;
 var userId;

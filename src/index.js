@@ -14,6 +14,7 @@ import waitImg from './wait.gif';
 var userId;
 var email;
 var admin="false";
+var selectedUser;
 
 	function wait(onOff){
 	       //alert(onOff);
@@ -46,8 +47,32 @@ class Container extends React.Component {
   
     componentDidMount() {
     this.UserList();
-	wait('on');
+	//wait('on');
   }
+  
+  
+  
+    CallDeleteUserAPI = (userId)=>{
+            var myHeaders = new Headers();
+            myHeaders.append("Content-Type", "application/json");
+            var raw = JSON.stringify({"userId":userId});
+            var requestOptions = {
+                method: 'POST',
+                headers: myHeaders,
+                body: raw,
+                redirect: 'follow'
+            };
+			//alert("222");alert(raw);
+            fetch("https://dh3d04lkq3.execute-api.us-west-2.amazonaws.com/dev", requestOptions)
+             .then(response => response.text())
+             .then(result => this.setDelUserData(JSON.parse(result).body))
+            .catch(error => alert(JSON.parse(error).body));
+        }
+	
+    setDelUserData(oneUserData){
+        alert(oneUserData);
+		this.UserList();
+    }	   
   
     CallGetUserAPI = (userId)=>{
             var myHeaders = new Headers();
@@ -67,11 +92,13 @@ class Container extends React.Component {
         }
 		
 
-   setGetUserData(oneUserData){
-			//alert("setGetUserData===");
+    setGetUserData(oneUserData){
+			//alert("setGetUserData===");			
 			
-			//alert(oneUserData);
 			oneUserData = JSON.parse(oneUserData);
+			
+			//alert(oneUserData.Items[0].userId);
+			selectedUser=oneUserData.Items[0].userId;
 			admin=oneUserData.Items[0].admin;
 			//alert(admin);
 			//alert(document.getElementById("admin").checked);
@@ -97,7 +124,7 @@ class Container extends React.Component {
 			wait('off');
 		}
 
-  UserList() {
+    UserList() {
         var myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/json");
         var raw = JSON.stringify({"userId":userId});
@@ -117,19 +144,32 @@ class Container extends React.Component {
     }
 
     setStateNow(userData){
-		
+		//alert("setStateNow:...")
         userData = userData.replace("Items", "values",1);
-		//alert(userData)
-		userData = JSON.parse(userData);
-		//alert(userData.values[0].userId)
-		//callGetAllUsersAPI(userData.values[0].userId);
-		this.CallGetUserAPI(userData.values[0].userId);
-    	this.setState(userData);
-		//wait('off');
+		//alert(userData)	
+		//alert(userData.search("\"Count\":0,"))
+		if (userData.search("\"Count\":0,")!=-1) {
+			//alert("111444")		
+		    wait('off');
+		} else {	
+		   //alert("setStateNow:.sss..")	
+		   userData = JSON.parse(userData);
+		   //alert(userData.values[0].userId)
+		   //callGetAllUsersAPI(userData.values[0].userId);
+		   this.CallGetUserAPI(userData.values[0].userId);
+		   //alert("111333")
+		   //alert(userData.values[0].userId)
+    	   this.setState(userData);
+		   //alert("111444")
+		}  
+
     }
 	
 	deleteProfile = () => {
-		alert("underconstruction");
+		//alert(selectedUser);
+		//alert(userData.values[0].userId);
+		wait('on');
+		this.CallDeleteUserAPI(selectedUser);
 	}
 
     updateProfile = () => {
@@ -189,6 +229,8 @@ class Container extends React.Component {
    handleChange = (e) => {
 	//alert("handleChange");
 	//alert(e.target.value);
+	//alert(e.target.value)
+	selectedUser=e.target.value;
 	this.setState({selectedValue: e.target.value})
 	this.CallGetUserAPI(e.target.value);
     
@@ -219,7 +261,7 @@ class Container extends React.Component {
 				<form id='profileForm' method='post' >					
 				<table> 
 				<tr>
-				<td align='right'><label>User</label></td>
+				<td align='right'><label>Display Name</label></td>
 				<td align='left' colspan='2' >
 				<select value={this.state.value} onChange={this.handleChange}>
 					{optionTemplate}

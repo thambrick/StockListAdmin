@@ -283,9 +283,9 @@ class Container extends React.Component {
 			    <input type='hidden' id='displayName' />
 
 				</td></tr>
-				<tr><td colspan='2' align='center'><NOBR>
+				<tr><td colspan='2' align='center'>
 				<input type='button' value="Submit" id='updateProfile' onClick={this.updateProfile}/> 
-			    <input type='button' value="Delete User" id='updateProfile' onClick={this.deleteProfile}/></NOBR></td></tr>
+			    <input type='button' value="Delete User" id='updateProfile' onClick={this.deleteProfile}/></td></tr>
 				</table>
                 </form>
                 </div>				

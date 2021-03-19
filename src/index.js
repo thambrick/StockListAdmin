@@ -261,7 +261,7 @@ class Container extends React.Component {
 				<form id='profileForm' method='post' >					
 				<table> 
 				<tr>
-				<td align='right'><label>Display Name</label></td>
+				<td align='right'><label>Name</label></td>
 				<td align='left' colspan='2' >
 				<select value={this.state.value} onChange={this.handleChange}>
 					{optionTemplate}
@@ -283,9 +283,9 @@ class Container extends React.Component {
 			    <input type='hidden' id='displayName' />
 
 				</td></tr>
-				<tr><td colspan='2' align='center'>
+				<tr><td colspan='2' align='center'><NOBR>
 				<input type='button' value="Submit" id='updateProfile' onClick={this.updateProfile}/> 
-			    <input type='button' value="Delete User" id='updateProfile' onClick={this.deleteProfile}/></td></tr>
+			    <input type='button' value="Delete User" id='updateProfile' onClick={this.deleteProfile}/></NOBR></td></tr>
 				</table>
                 </form>
                 </div>				

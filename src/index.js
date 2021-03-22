@@ -11,12 +11,16 @@ var admin="false";
 var selectedUser;
 
 
-window.refreshFunction = function(){
-	alert("test123 userId=");
-	alert(userId);
-	this.UserList();
-	
-}
+	//window.refreshFunction = function(){
+		//alert("test123 userId=");
+		//alert(userId);
+		//this.UserList();
+	//}
+
+function Reset() 
+        {
+            alert("reset (in resultframe)");
+        }
 
 function wait(onOff){
 	       //alert(onOff);

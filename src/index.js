@@ -1,22 +1,23 @@
-//import React from 'react';
-//import ReactDOM from 'react-dom';
-//const myfirstelement = <h1>Hello React!...ssss...</h1>
-//ReactDOM.render(myfirstelement, document.getElementById('root'));
 
-//import React, { Component } from 'react';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './main.css';
-//import waitImg from './images/wait.gif';
 import waitImg from './wait.gif';
 
-//var userList;
 var userId;
 var email;
 var admin="false";
 var selectedUser;
 
-	function wait(onOff){
+
+window.refreshFunction = function(){
+	alert("test123 userId=");
+	alert(userId);
+	UserList();
+	
+}
+
+function wait(onOff){
 	       //alert(onOff);
 		   if (onOff === 'on') { 
 		     document.getElementById('waitDiv2').style.display = "block";
@@ -42,7 +43,6 @@ class Container extends React.Component {
 	this.state = {values: []};
 
 	//window.location="https://www.stocklistnow.com/";
-	
   }
   
     componentDidMount() {
@@ -148,7 +148,7 @@ class Container extends React.Component {
         userData = userData.replace("Items", "values",1);
 		//alert(userData)	
 		//alert(userData.search("\"Count\":0,"))
-		if (userData.search("\"Count\":0,")!=-1) {
+		if (userData.search("\"Count\":0,")!==-1) {
 			//alert("111444")		
 		    wait('off');
 		} else {	
@@ -173,10 +173,6 @@ class Container extends React.Component {
 	}
 
     updateProfile = () => {
-	//alert("updated Profile."); 
-    //alert(document.getElementById("displayName").value);	
-    //this.setState({show: false});
-		//let userId = document.cookie.replace(/(?:(?:^|.*;\s*)userId\s*\=\s*([^;]*).*$)|^.*$/, "$1"); 
 		if ((!userId)||(userId==="")){ 
 		   alert("you must login before editing user profiles"); 
 		   return false;
@@ -213,9 +209,6 @@ class Container extends React.Component {
 
 
   handleCheckboxChange = event => {
-	//alert("handleCheckboxChange");
-	  
-	//alert(event.target.checked);
 	if (event.target.checked)
 		admin="true";
 	else 
@@ -227,20 +220,10 @@ class Container extends React.Component {
   }
   
    handleChange = (e) => {
-	//alert("handleChange");
-	//alert(e.target.value);
-	//alert(e.target.value)
 	selectedUser=e.target.value;
 	this.setState({selectedValue: e.target.value})
-	this.CallGetUserAPI(e.target.value);
-    
+	this.CallGetUserAPI(e.target.value); 
   }
-
-/*
-	.ajax-loader {
-		position: absolute;left: 0;top: 0;right: 0;bottom: 0;margin: auto; 
-		}
-		*/
  
   render() {
     let optionTemplate = this.state.values.map(v => (
@@ -293,6 +276,5 @@ class Container extends React.Component {
         );
   }
 }
-
 
 ReactDOM.render(<Container />, document.getElementById('root'));

@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom';
 import './main.css';
 import waitImg from './wait.gif';
 
+//var userList;
 var userId;
 var email;
 var admin="false";
@@ -13,7 +14,7 @@ var selectedUser;
 window.refreshFunction = function(){
 	alert("test123 userId=");
 	alert(userId);
-	UserList();
+	this.UserList();
 	
 }
 

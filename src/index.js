@@ -23,9 +23,9 @@ function Reset()
         }
 		
 window.addEventListener('message', function(event) {
-      //alert("ttttt222");
-	  //this.UserList();
-	  //alert("tttttxxx");
+      alert("ttttt222");
+	  window.location.reload(false);
+	  alert("tttttxxx");
     // IMPORTANT: Check the origin of the data!
     if (event.origin.indexOf('http://yoursite.com')) {
         // The data has been sent from your site

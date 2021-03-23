@@ -11,11 +11,11 @@ var admin="false";
 var selectedUser;
 
 
-	//window.refreshFunction = function(){
-		//alert("test123 userId=");
+	window.refreshFunction = function(){
+		alert("test123 userId=");
 		//alert(userId);
 		//this.UserList();
-	//}
+	}
 
 function Reset() 
         {

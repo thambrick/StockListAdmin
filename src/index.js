@@ -23,20 +23,20 @@ function Reset()
         }
 		
 window.addEventListener('message', function(event) {
-      alert("ttttt222");
+      //alert("ttttt222");
 	  window.location.reload(false);
-	  alert("tttttxxx");
+	  //alert("tttttxxx");
     // IMPORTANT: Check the origin of the data!
-    if (event.origin.indexOf('http://yoursite.com')) {
+ //   if (event.origin.indexOf('http://yoursite.com')) {
         // The data has been sent from your site
 
         // The data sent with postMessage is stored in event.data
-        console.log(event.data);
-    } else {
+ //       console.log(event.data);
+ //   } else {
         // The data hasn't been sent from your site!
         // Be careful! Do not use it.
-        return;
-    }
+ //       return;
+ //   }
 });
 
 function wait(onOff){

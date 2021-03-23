@@ -21,6 +21,21 @@ function Reset()
         {
             alert("reset (in resultframe)");
         }
+		
+window.addEventListener('message', function(event) {
+      alert("ttttt");
+    // IMPORTANT: Check the origin of the data!
+    if (event.origin.indexOf('http://yoursite.com')) {
+        // The data has been sent from your site
+
+        // The data sent with postMessage is stored in event.data
+        console.log(event.data);
+    } else {
+        // The data hasn't been sent from your site!
+        // Be careful! Do not use it.
+        return;
+    }
+});
 
 function wait(onOff){
 	       //alert(onOff);

@@ -297,7 +297,7 @@ class Container extends React.Component {
 				</td></tr>
 				<tr><td colspan='2' align='center'>
 				<input type='button' value="Submit" id='updateProfile' onClick={this.updateProfile}/> 
-			    <input type='button' value="Delete User" id='updateProfile' onClick={this.deleteProfile}/>
+			    <input type='button' value="Delete User..." id='updateProfile' onClick={this.deleteProfile}/>
 				<input type='button' value="Close" id='closeWindow' onClick={this.closeWindow}/>
 
 				</td></tr>

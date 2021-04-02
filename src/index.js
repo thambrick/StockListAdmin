@@ -15,7 +15,7 @@ var selectedUser;
 	//	alert("test123 userId=");
 		//alert(userId);
 		//this.UserList();
-	//}
+	//} 
 
         //function closeWindow2() 
         //{
@@ -197,12 +197,13 @@ class Container extends React.Component {
 		}  
 
     }
-	
+
 	deleteProfile = () => {
-		//alert(selectedUser);
-		//alert(userData.values[0].userId);
-		wait('on');
-		this.CallDeleteUserAPI(selectedUser);
+
+		if (window.confirm('Comfirm delete user?')) {
+			wait('on');
+			this.CallDeleteUserAPI(selectedUser); 
+		}
 	}
 
     updateProfile = () => {
@@ -300,9 +301,11 @@ class Container extends React.Component {
 
 				</td></tr>
 				<tr><td colspan='2' align='center'>
-				<input type='button' value="Submit" id='updateProfile' onClick={this.updateProfile}/> 
-			    <input type='button' value="Delete User" id='updateProfile' onClick={this.deleteProfile}/>
-
+				<input type='button' value="Update" id='updateProfile' onClick={this.updateProfile}/> 
+			    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<input type='button' value="Delete User" id='updateProfile' onClick={this.deleteProfile}/>
+	            
+	
 
 				</td></tr>
 				</table>

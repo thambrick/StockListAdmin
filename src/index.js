@@ -17,11 +17,11 @@ var selectedUser;
 		//this.UserList();
 	//}
 
-        function closeWindow2() 
-        {
-            alert("in closeWindow2");
-			parent.adminScreen();
-        }
+        //function closeWindow2() 
+        //{
+            //alert("in closeWindow2");
+			//parent.adminScreen();
+        //}
 		
 //window.addEventListener('message', function(event) {
 //      alert("addEventListener");
@@ -58,8 +58,11 @@ class Container extends React.Component {
     super(props);
 	//let userId2 = document.cookie.replace(/(?:(?:^|.*;\s*)userId\s*\=\s*([^;]*).*$)|^.*$/, "$1"); 
 	//parent.iFrameWin = window;
+	
+	
 
 	let params = window.location.search;
+	
 	userId = params.replace("?userid=", "");
 	//userId = params.substring(0, params.search("&email="));
 	//alert(userId);
@@ -75,11 +78,12 @@ class Container extends React.Component {
   }
   
 
-    closeWindow() {
-            alert("in closeWindow");
-			parent.adminScreen();
-			alert("...in closeWindow");
-        }
+    //closeWindow() {
+            //alert("in closeWindow");
+			//parent2.adminScreen(); <input type='button' value="Close1" id='closeWindow' onClick={this.closeWindow}/>
+			//this.window.close();
+			//alert("...in closeWindow");
+        //}
   
     CallDeleteUserAPI = (userId)=>{
             var myHeaders = new Headers();
@@ -297,11 +301,12 @@ class Container extends React.Component {
 				</td></tr>
 				<tr><td colspan='2' align='center'>
 				<input type='button' value="Submit" id='updateProfile' onClick={this.updateProfile}/> 
-			    <input type='button' value="Delete User..." id='updateProfile' onClick={this.deleteProfile}/>
-				<input type='button' value="Close" id='closeWindow' onClick={this.closeWindow}/>
+			    <input type='button' value="Delete User" id='updateProfile' onClick={this.deleteProfile}/>
+
 
 				</td></tr>
 				</table>
+				
                 </form>
                 </div>				
 				</section> 

@@ -11,21 +11,22 @@ var admin="false";
 var selectedUser;
 
 
-	window.refreshFunction = function(){
-		alert("test123 userId=");
+	//window.refreshFunction = function(){
+	//	alert("test123 userId=");
 		//alert(userId);
 		//this.UserList();
-	}
+	//}
 
-function Reset() 
-        {
-            alert("reset (in resultframe)");
-        }
+//function Reset() 
+        //{
+        //    alert("reset (in resultframe)");
+        //}
 		
-window.addEventListener('message', function(event) {
-      //alert("ttttt222");
-	  window.location.reload(false);
-	  //alert("tttttxxx");
+//window.addEventListener('message', function(event) {
+//      alert("addEventListener");
+//	  alert(event.data);
+//	  window.location.reload(false);
+	  //
     // IMPORTANT: Check the origin of the data!
  //   if (event.origin.indexOf('http://yoursite.com')) {
         // The data has been sent from your site
@@ -37,7 +38,7 @@ window.addEventListener('message', function(event) {
         // Be careful! Do not use it.
  //       return;
  //   }
-});
+//});
 
 function wait(onOff){
 	       //alert(onOff);

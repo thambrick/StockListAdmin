@@ -17,10 +17,11 @@ var selectedUser;
 		//this.UserList();
 	//}
 
-//function Reset() 
-        //{
-        //    alert("reset (in resultframe)");
-        //}
+        function closeWindow2() 
+        {
+            alert("in closeWindow2");
+			parent.adminScreen();
+        }
 		
 //window.addEventListener('message', function(event) {
 //      alert("addEventListener");
@@ -73,7 +74,12 @@ class Container extends React.Component {
 	//wait('on');
   }
   
-  
+
+    closeWindow() {
+            alert("in closeWindow");
+			parent.adminScreen();
+			alert("...in closeWindow");
+        }
   
     CallDeleteUserAPI = (userId)=>{
             var myHeaders = new Headers();
@@ -291,7 +297,10 @@ class Container extends React.Component {
 				</td></tr>
 				<tr><td colspan='2' align='center'>
 				<input type='button' value="Submit" id='updateProfile' onClick={this.updateProfile}/> 
-			    <input type='button' value="Delete User" id='updateProfile' onClick={this.deleteProfile}/></td></tr>
+			    <input type='button' value="Delete User" id='updateProfile' onClick={this.deleteProfile}/>
+				<input type='button' value="Close" id='closeWindow' onClick={this.closeWindow}/>
+
+				</td></tr>
 				</table>
                 </form>
                 </div>				

@@ -287,7 +287,7 @@ class Container extends React.Component {
                 </tr>
 				<tr><td align='right' style={{width:'25%'}}><label>City</label></td><td><input type='text' id='city' onchange={this.handleChange}/></td></tr>
                 <tr><td align='right' style={{width:'25%'}}><label>Email</label></td><td><input type='text' defaultValue={email} id='email' onchange={this.handleChange}/></td></tr>
-			    <tr><td align='right'style={{width:'25%';textAlignVertical:'top'}}><label>Administrator</label></td><td>		
+			    <tr><td align='right'style={{width:'25%',textAlignVertical:'top'}}><label>Admin</label></td><td>		
 				<input type="checkbox" onChange={this.handleCheck} defaultChecked={this.state.checked}/>
 				<label>
 				<Checkbox id='admin'

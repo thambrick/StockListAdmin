@@ -1,0 +1,16 @@
+	select.round {
+	  color='white',
+	  backgroundimage=
+		linear-gradient('45deg', 'transparent 50%', 'gray 50%'),
+		linear-gradient('135deg', 'gray 50%', 'transparent 50%'),
+		radial-gradient('#ddd 70%', 'transparent 72%'),
+	  backgroundposition=
+		calc('100% - 20px'), calc('1em + 2px'),
+		calc('100% - 15px'), calc('1em + 2px'),
+		calc('100% - .5em'), '.5em',
+	  backgroundsize=
+		'5px 5px',
+		'5px 5px',
+		'1.5em 1.5em',
+	  backgroundrepeat= no-repeat
+	}

@@ -2,7 +2,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './main.css';
+//import './reactSelect.css';
 import waitImg from './wait.gif';
+
+
 
 //var userList;
 var userId;
@@ -269,18 +272,18 @@ class Container extends React.Component {
 				<form id='profileForm' method='post' >					
 				<table> 
 				<tr>
-				<td align='right' style={{width:'37%'}}><label>Name</label></td>
+				<td align='right' style={{width:'38%'}}><label>Name</label></td>
 				<td align='left' colspan='2' >
-				<select style={{dropdownIndicator:'black',width:'268px',background:'white',color:'rgba(25, 25, 25, 5)'}} value={this.state.value} onChange={this.handleChange}>
+				<select style={{dropdownIndicator:'black',width:'240px',background:'white',color:'rgba(25, 25, 25, 5)'}} value={this.state.value} onChange={this.handleChange}>
 					{optionTemplate}
 				</select>
                 </td>
                 </tr>
-				<tr><td align='right' style={{width:'37%'}}><label>City</label></td><td><input style={{color:'rgba(25, 25, 25, 5)',width:'268px'}} id='city' onchange={this.handleChange}/></td></tr>
-                <tr><td align='right' style={{width:'37%'}}><label>Email</label></td><td><input style={{color:'rgba(25, 25, 25, 5)',width:'268px'}} defaultValue={email} id='email' onchange={this.handleChange}/></td></tr>
-			    <tr><td align='right' style={{width:'37%',}}><label>ID</label></td><td><label id='userId'></label></td></tr>
+				<tr><td align='right' style={{width:'38%'}}><label>City</label></td><td><input style={{color:'rgba(25, 25, 25, 5)',width:'240px'}} id='city' onchange={this.handleChange}/></td></tr>
+                <tr><td align='right' style={{width:'38%'}}><label>Email</label></td><td><input style={{color:'rgba(25, 25, 25, 5)',width:'240px'}} defaultValue={email} id='email' onchange={this.handleChange}/></td></tr>
+			    <tr><td align='right' style={{width:'38%',}}><label>ID</label></td><td><label id='userId'></label></td></tr>
 			    
-				<tr><td align='right'style={{width:'37%',textAlignVertical:'top',color:'rgba(25, 25, 25, 5)'}}><label>Admin</label></td><td>		
+				<tr><td align='right'style={{width:'38%',textAlignVertical:'top',color:'rgba(25, 25, 25, 5)'}}><label>Admin</label></td><td>		
 				<input type="checkbox" onChange={this.handleCheck} defaultChecked={this.state.checked}/>
 				<label>
 				<Checkbox id='admin'

@@ -285,9 +285,11 @@ class Container extends React.Component {
 				</select>
                 </td>
                 </tr>
-				<tr><td align='right' style={{width:'25%'}}><label>City</label></td><td><input type='text' id='city' onchange={this.handleChange}/></td></tr>
-                <tr><td align='right' style={{width:'25%'}}><label>Email</label></td><td><input type='text' defaultValue={email} id='email' onchange={this.handleChange}/></td></tr>
-			    <tr><td align='right'style={{width:'25%',textAlignVertical:'top'}}><label>Admin</label></td><td>		
+				<tr><td align='right' style={{width:'25%',color:'rgba(25, 25, 25, 5)'}}><label>City</label></td><td><input type='text' id='city' onchange={this.handleChange}/></td></tr>
+                <tr><td align='right' style={{width:'25%',color:'rgba(25, 25, 25, 5)'}}><label>Email</label></td><td><input type='text' defaultValue={email} id='email' onchange={this.handleChange}/></td></tr>
+			    <tr><td align='right' style={{width:'25%',color:'rgba(25, 25, 25, 5)'}}><label>ID</label></td><td><label>{userId}</label></td></tr>
+			    
+				<tr><td align='right'style={{width:'25%',textAlignVertical:'top',color:'rgba(25, 25, 25, 5)'}}><label>Admin</label></td><td>		
 				<input type="checkbox" onChange={this.handleCheck} defaultChecked={this.state.checked}/>
 				<label>
 				<Checkbox id='admin'
@@ -304,8 +306,7 @@ class Container extends React.Component {
 				<input type='button' value="Update" id='updateProfile' onClick={this.updateProfile}/> 
 			    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				<input type='button' value="Delete User" id='updateProfile' onClick={this.deleteProfile}/>
-	            
-	
+
 
 				</td></tr>
 				</table>

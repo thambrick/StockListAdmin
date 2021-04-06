@@ -56,10 +56,8 @@ function wait(onOff){
 class Container extends React.Component {
   constructor(props) {
     super(props);
-	//let userId2 = document.cookie.replace(/(?:(?:^|.*;\s*)userId\s*\=\s*([^;]*).*$)|^.*$/, "$1"); 
-	//parent.iFrameWin = window;
-	
-	
+
+
 
 	let params = window.location.search;
 	
@@ -76,14 +74,7 @@ class Container extends React.Component {
     this.UserList();
 	//wait('on');
   }
-  
 
-    //closeWindow() {
-            //alert("in closeWindow");
-			//parent2.adminScreen(); <input type='button' value="Close1" id='closeWindow' onClick={this.closeWindow}/>
-			//this.window.close();
-			//alert("...in closeWindow");
-        //}
   
     CallDeleteUserAPI = (userId)=>{
             var myHeaders = new Headers();
@@ -153,7 +144,7 @@ class Container extends React.Component {
 			document.getElementById("email").value=oneUserData.Items[0].email;
 			document.getElementById("displayName").value=oneUserData.Items[0].displayName;
 			document.getElementById("city").value=oneUserData.Items[0].city;
-			document.getElementById("userId").value=oneUserData.Items[0].userId;
+			document.getElementById("userId").innerHTML=oneUserData.Items[0].userId;
 			wait('off');
 		}
 
@@ -248,7 +239,7 @@ class Container extends React.Component {
 	else 
 		admin="false";  
 	  
-	//alert(admin);
+	//alert(admin);<!---input type='hidden'  id='userId' /--->
     this.setState({ checked: event.target.checked })
 	
   }
@@ -278,18 +269,18 @@ class Container extends React.Component {
 				<form id='profileForm' method='post' >					
 				<table> 
 				<tr>
-				<td align='right' style={{width:'25%'}}><label>Name</label></td>
+				<td align='right' style={{width:'37%'}}><label>Name</label></td>
 				<td align='left' colspan='2' >
-				<select value={this.state.value} onChange={this.handleChange}>
+				<select style={{dropdownIndicator:'black',width:'268px',background:'white',color:'rgba(25, 25, 25, 5)'}} value={this.state.value} onChange={this.handleChange}>
 					{optionTemplate}
 				</select>
                 </td>
                 </tr>
-				<tr><td align='right' style={{width:'25%',color:'rgba(25, 25, 25, 5)'}}><label>City</label></td><td><input type='text' id='city' onchange={this.handleChange}/></td></tr>
-                <tr><td align='right' style={{width:'25%',color:'rgba(25, 25, 25, 5)'}}><label>Email</label></td><td><input type='text' defaultValue={email} id='email' onchange={this.handleChange}/></td></tr>
-			    <tr><td align='right' style={{width:'25%',color:'rgba(25, 25, 25, 5)'}}><label>ID</label></td><td><label>{userId}</label></td></tr>
+				<tr><td align='right' style={{width:'37%'}}><label>City</label></td><td><input style={{color:'rgba(25, 25, 25, 5)',width:'268px'}} id='city' onchange={this.handleChange}/></td></tr>
+                <tr><td align='right' style={{width:'37%'}}><label>Email</label></td><td><input style={{color:'rgba(25, 25, 25, 5)',width:'268px'}} defaultValue={email} id='email' onchange={this.handleChange}/></td></tr>
+			    <tr><td align='right' style={{width:'37%',}}><label>ID</label></td><td><label id='userId'></label></td></tr>
 			    
-				<tr><td align='right'style={{width:'25%',textAlignVertical:'top',color:'rgba(25, 25, 25, 5)'}}><label>Admin</label></td><td>		
+				<tr><td align='right'style={{width:'37%',textAlignVertical:'top',color:'rgba(25, 25, 25, 5)'}}><label>Admin</label></td><td>		
 				<input type="checkbox" onChange={this.handleCheck} defaultChecked={this.state.checked}/>
 				<label>
 				<Checkbox id='admin'
@@ -298,7 +289,7 @@ class Container extends React.Component {
 				/>
 				</label>
 
-				<input type='hidden'  id='userId' />
+				
 			    <input type='hidden' id='displayName' />
 
 				</td></tr>

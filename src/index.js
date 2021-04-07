@@ -272,18 +272,18 @@ class Container extends React.Component {
 				<form id='profileForm' method='post' >					
 				<table> 
 				<tr>
-				<td align='right' style={{width:'38%'}}><label>Name</label></td>
+				<td align='right' style={{width:'36%'}}><label>Name</label></td>
 				<td align='left' colspan='2' >
-				<select style={{dropdownIndicator:'black',width:'235px',background:'white',color:'rgba(25, 25, 25, 5)'}} value={this.state.value} onChange={this.handleChange}>
+				<select style={{dropdownIndicator:'black',width:'225px',background:'white',color:'rgba(25, 25, 25, 5)'}} value={this.state.value} onChange={this.handleChange}>
 					{optionTemplate}
 				</select>
                 </td>
                 </tr>
-				<tr><td align='right' style={{width:'38%'}}><label>City</label></td><td><input style={{color:'rgba(25, 25, 25, 5)',width:'235px'}} id='city' onchange={this.handleChange}/></td></tr>
-                <tr><td align='right' style={{width:'38%'}}><label>Email</label></td><td><input style={{color:'rgba(25, 25, 25, 5)',width:'235px'}} defaultValue={email} id='email' onchange={this.handleChange}/></td></tr>
-			    <tr><td align='right' style={{width:'38%',}}><label>ID</label></td><td><label id='userId'></label></td></tr>
+				<tr><td align='right' style={{width:'36%'}}><label>City</label></td><td><input style={{color:'rgba(25, 25, 25, 5)',width:'225px'}} id='city' onchange={this.handleChange}/></td></tr>
+                <tr><td align='right' style={{width:'36%'}}><label>Email</label></td><td><input style={{color:'rgba(25, 25, 25, 5)',width:'225px'}} defaultValue={email} id='email' onchange={this.handleChange}/></td></tr>
+			    <tr><td align='right' style={{width:'36%',}}><label>ID</label></td><td><label id='userId'></label></td></tr>
 			    
-				<tr><td align='right'style={{width:'38%',textAlignVertical:'top',color:'rgba(25, 25, 25, 5)'}}><label>Admin</label></td><td>		
+				<tr><td align='right'style={{width:'36%',textAlignVertical:'top',color:'rgba(25, 25, 25, 5)'}}><label>Admin</label></td><td>		
 				<input type="checkbox" style={{textAlignVertical:'bottom'}}onChange={this.handleCheck} defaultChecked={this.state.checked}/>
 				<label>
 				<Checkbox id='admin'
@@ -291,8 +291,6 @@ class Container extends React.Component {
 					onChange={this.handleCheckboxChange}
 				/>
 				</label>
-
-				
 			    <input type='hidden' id='displayName' />
 
 				</td></tr>

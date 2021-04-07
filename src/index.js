@@ -2,12 +2,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './main.css';
-//import './reactSelect.css';
 import waitImg from './wait.gif';
 
-
-
-//var userList;
 var userId;
 var email;
 var admin="false";
@@ -60,25 +56,16 @@ class Container extends React.Component {
   constructor(props) {
     super(props);
 
-
-
 	let params = window.location.search;
-	
 	userId = params.replace("?userid=", "");
-	//userId = params.substring(0, params.search("&email="));
-	//alert(userId);
-	//this.state = setGetAllUserData("");
 	this.state = {values: []};
-
 	//window.location="https://www.stocklistnow.com/";
-  }
+    }
   
     componentDidMount() {
     this.UserList();
-	//wait('on');
-  }
+    }
 
-  
     CallDeleteUserAPI = (userId)=>{
             var myHeaders = new Headers();
             myHeaders.append("Content-Type", "application/json");
@@ -121,29 +108,16 @@ class Container extends React.Component {
 
     setGetUserData(oneUserData){
 			//alert("setGetUserData===");			
-			
 			oneUserData = JSON.parse(oneUserData);
-			
-			//alert(oneUserData.Items[0].userId);
 			selectedUser=oneUserData.Items[0].userId;
 			admin=oneUserData.Items[0].admin;
-			//alert(admin);
-			//alert(document.getElementById("admin").checked);
-			//document.getElementById("admin").checked=true;
-			//alert(document.getElementById("admin").checked);
-			
 		    if (admin==="true"){
 			   admin="true";
-			   //document.getElementById("admin").checked=true;
 			   this.setState({ checked: true })
 			} else {
 			   admin="false";
-			   //document.getElementById("admin").checked=false;
 			   this.setState({ checked: false })
 			}   
-			//alert("setGetUserData===");
-			//alert(admin);
-			//document.getElementById("admin").checked=true;
 			document.getElementById("email").value=oneUserData.Items[0].email;
 			document.getElementById("displayName").value=oneUserData.Items[0].displayName;
 			document.getElementById("city").value=oneUserData.Items[0].city;
@@ -161,39 +135,25 @@ class Container extends React.Component {
             body: raw,
             redirect: 'follow'
             };
-			//alert("111");alert(raw);
             fetch("https://ohqt9x52g9.execute-api.us-west-2.amazonaws.com/dev", requestOptions)
              .then(response => response.text())
 			 .then(result => this.setStateNow(JSON.parse(result).body))
-             //.then(result => this.setState(JSON.parse(result).body))
-			 //.then(result => alert(JSON.parse(result).body))
             .catch(error => alert(JSON.parse(error).body));
     }
 
     setStateNow(userData){
-		//alert("setStateNow:...")
         userData = userData.replace("Items", "values",1);
-		//alert(userData)	
-		//alert(userData.search("\"Count\":0,"))
-		if (userData.search("\"Count\":0,")!==-1) {
-			//alert("111444")		
+		if (userData.search("\"Count\":0,")!==-1) {		
 		    wait('off');
-		} else {	
-		   //alert("setStateNow:.sss..")	
+		} else {		
 		   userData = JSON.parse(userData);
-		   //alert(userData.values[0].userId)
-		   //callGetAllUsersAPI(userData.values[0].userId);
 		   this.CallGetUserAPI(userData.values[0].userId);
-		   //alert("111333")
-		   //alert(userData.values[0].userId)
     	   this.setState(userData);
-		   //alert("111444")
 		}  
 
     }
 
 	deleteProfile = () => {
-
 		if (window.confirm('Comfirm delete user?')) {
 			wait('on');
 			this.CallDeleteUserAPI(selectedUser); 
@@ -225,7 +185,6 @@ class Container extends React.Component {
             };
 			fetch("https://u3yyrwv2r5.execute-api.us-west-2.amazonaws.com/dev", requestOptions)
              .then(response => response.text())
-			 //.then(result => alert(JSON.parse(result).body))
 			 .then(result => {alert(JSON.parse(result).body);wait('off');})
             .catch(error => alert(JSON.parse(error).body));
 		} catch (error) {
@@ -233,30 +192,30 @@ class Container extends React.Component {
 			alert(error);
 		}
 		
-  }
+	  }
 
 
-  handleCheckboxChange = event => {
-	if (event.target.checked)
-		admin="true";
-	else 
-		admin="false";  
+	handleCheckboxChange = event => {
+		if (event.target.checked)
+			admin="true";
+		else 
+			admin="false";  
+		  
+		this.setState({ checked: event.target.checked })
+		
+	  }
 	  
-	//alert(admin);<!---input type='hidden'  id='userId' /--->
-    this.setState({ checked: event.target.checked })
-	
-  }
-  
-   handleChange = (e) => {
-	selectedUser=e.target.value;
-	this.setState({selectedValue: e.target.value})
-	this.CallGetUserAPI(e.target.value); 
-  }
- 
-  render() {
-    let optionTemplate = this.state.values.map(v => (
-      <option value={v.userId}>{v.displayName}</option>
-    )); 
+	handleChange = (e) => {
+		selectedUser=e.target.value;
+		this.setState({selectedValue: e.target.value})
+		this.CallGetUserAPI(e.target.value); 
+	  }
+	 
+	render() {
+		let optionTemplate = this.state.values.map(v => (
+		   <option value={v.userId}>{v.displayName}</option> 
+			  
+		)); 
 	
 	const Checkbox = props => (
 		<input type="checkbox" {...props} />
@@ -268,19 +227,19 @@ class Container extends React.Component {
 				<div id="waitDiv2" align="center" style={{zIndex:10000}}>
 					<img id='waitImg2' alt="Wait" src={waitImg} class='ajax-loader'  style={{zIndex:10000,position: 'absolute',left: 0,top: 0,right: 0,bottom: 0,margin: 'auto'}}/>
 				</div>
-				<center><h2><label id='profileTitle'>Administration</label></h2></center>
+				<center><h2><label id='profileTitle'>Administration</label></h2>
 				<form id='profileForm' method='post' >					
 				<table> 
 				<tr>
 				<td align='right' style={{width:'36%'}}><label>Name</label></td>
 				<td align='left' colspan='2' >
-				<select style={{dropdownIndicator:'black',width:'225px',background:'white',color:'rgba(25, 25, 25, 5)'}} value={this.state.value} onChange={this.handleChange}>
+				<select style={{dropdownIndicator:'black',width:'215px',background:'white',color:'rgba(25, 25, 25, 5)'}} value={this.state.value} onChange={this.handleChange}>
 					{optionTemplate}
 				</select>
                 </td>
                 </tr>
-				<tr><td align='right' style={{width:'36%'}}><label>City</label></td><td><input style={{color:'rgba(25, 25, 25, 5)',width:'225px'}} id='city' onchange={this.handleChange}/></td></tr>
-                <tr><td align='right' style={{width:'36%'}}><label>Email</label></td><td><input style={{color:'rgba(25, 25, 25, 5)',width:'225px'}} defaultValue={email} id='email' onchange={this.handleChange}/></td></tr>
+				<tr><td align='right' style={{width:'36%'}}><label>City</label></td><td><input style={{color:'rgba(25, 25, 25, 5)',width:'215px'}} id='city' onchange={this.handleChange}/></td></tr>
+                <tr><td align='right' style={{width:'36%'}}><label>Email</label></td><td><input style={{color:'rgba(25, 25, 25, 5)',width:'215px'}} defaultValue={email} id='email' onchange={this.handleChange}/></td></tr>
 			    <tr><td align='right' style={{width:'36%',}}><label>ID</label></td><td><label id='userId'></label></td></tr>
 			    
 				<tr><td align='right'style={{width:'36%',textAlignVertical:'top',color:'rgba(25, 25, 25, 5)'}}><label>Admin</label></td><td>		
@@ -304,6 +263,7 @@ class Container extends React.Component {
 				</table>
 				
                 </form>
+				</center>
                 </div>				
 				</section> 
         );

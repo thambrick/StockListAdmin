@@ -6,7 +6,7 @@ import waitImg from './wait.gif';
 
 var userId;
 var email;
-var color;
+//var color;
 var admin="false";
 var selectedUser;
 
@@ -66,7 +66,7 @@ class Container extends React.Component {
 	//alert(userId);
 	userId = userId.substring(0,userId.search("&color="));
 	
-	color = "backgroundColor:'"+params.replace("?userid="+userId+"&color=", "")+"'";
+	//color = "backgroundColor:'"+params.replace("?userid="+userId+"&color=", "")+"'";
 	//alert(color);	 
 		 
 	

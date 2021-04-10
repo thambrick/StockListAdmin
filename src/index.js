@@ -6,6 +6,7 @@ import waitImg from './wait.gif';
 
 var userId;
 var email;
+var color;
 var admin="false";
 var selectedUser;
 
@@ -56,8 +57,25 @@ class Container extends React.Component {
   constructor(props) {
     super(props);
 
+	//document.getElementById('StockListAdmin').src=
+	//"https://www.stocklistsite.com?userid=" + userId + "&color="+color;
+			  	  
 	let params = window.location.search;
 	userId = params.replace("?userid=", "");
+	
+	//teststr="?userid=c5555&color=blue";
+	//alert(teststr);
+	color = params.replace("?userid="+userId+"&&color=", "");
+		 
+		 //alert(teststr);
+		 //alert(teststr.search("&color"));
+		 //uuu=teststr.substring(0,teststr.search("&color="));
+		 //alert(uuu);
+		 //alert(teststr);
+		 //uuu=teststr.substring(teststr.search(uuu+"&color="),teststr.length);
+		 //uuu=teststr.replace(uuu+"&color=", "");
+		 //alert(uuu);
+	
 	this.state = {values: []};
 	//window.location="https://www.stocklistnow.com/";
     }
@@ -222,7 +240,7 @@ class Container extends React.Component {
 	)
 			
     return (    
-	            <section id="yourProfile" class="wrapper style2 spotlights">
+	            <section id="yourProfile" style={{backgroundcolor:color}} class="wrapper style2 spotlights">
                 <div class="inner">    
 				<div id="waitDiv2" align="center" style={{zIndex:10000}}>
 					<img id='waitImg2' alt="Wait" src={waitImg} class='ajax-loader'  style={{zIndex:10000,position: 'absolute',left: 0,top: 0,right: 0,bottom: 0,margin: 'auto'}}/>

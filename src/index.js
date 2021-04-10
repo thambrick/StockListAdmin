@@ -61,27 +61,21 @@ class Container extends React.Component {
 	//"https://www.stocklistsite.com?userid=" + userId + "&color="+color;
 			  	  
 	let params = window.location.search;
+	//alert(params);
 	userId = params.replace("?userid=", "");
+	//alert(userId);
+	userId = userId.substring(0,userId.search("&color="));
 	
-	//teststr="?userid=c5555&color=blue";
-	//alert(teststr);
-	color = params.replace("?userid="+userId+"&&color=", "");
+	color = "backgroundColor:'"+params.replace("?userid="+userId+"&color=", "")+"'";
+	//alert(color);	 
 		 
-		 //alert(teststr);
-		 //alert(teststr.search("&color"));
-		 //uuu=teststr.substring(0,teststr.search("&color="));
-		 //alert(uuu);
-		 //alert(teststr);
-		 //uuu=teststr.substring(teststr.search(uuu+"&color="),teststr.length);
-		 //uuu=teststr.replace(uuu+"&color=", "");
-		 //alert(uuu);
 	
 	this.state = {values: []};
 	//window.location="https://www.stocklistnow.com/";
     }
   
     componentDidMount() {
-    this.UserList();
+		this.UserList();
     }
 
     CallDeleteUserAPI = (userId)=>{
@@ -167,8 +161,7 @@ class Container extends React.Component {
 		   userData = JSON.parse(userData);
 		   this.CallGetUserAPI(userData.values[0].userId);
     	   this.setState(userData);
-		}  
-
+		} 
     }
 
 	deleteProfile = () => {
@@ -209,7 +202,6 @@ class Container extends React.Component {
 			//console.error(error);
 			alert(error);
 		}
-		
 	  }
 
 
@@ -220,13 +212,13 @@ class Container extends React.Component {
 			admin="false";  
 		  
 		this.setState({ checked: event.target.checked })
-		
 	  }
 	  
 	handleChange = (e) => {
 		selectedUser=e.target.value;
 		this.setState({selectedValue: e.target.value})
 		this.CallGetUserAPI(e.target.value); 
+		//class="wrapper style2 spotlights"
 	  }
 	 
 	render() {
@@ -240,7 +232,7 @@ class Container extends React.Component {
 	)
 			
     return (    
-	            <section id="yourProfile" style={{backgroundcolor:color}} class="wrapper style2 spotlights">
+	            <section id="yourProfile" style={{color}} >
                 <div class="inner">    
 				<div id="waitDiv2" align="center" style={{zIndex:10000}}>
 					<img id='waitImg2' alt="Wait" src={waitImg} class='ajax-loader'  style={{zIndex:10000,position: 'absolute',left: 0,top: 0,right: 0,bottom: 0,margin: 'auto'}}/>

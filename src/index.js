@@ -229,8 +229,7 @@ class Container extends React.Component {
 	 
 	render() {
 		let optionTemplate = this.state.values.map(v => (
-		   <option value={v.userId}>{v.displayName}</option> 
-			  
+		   <option value={v.userId}>{v.displayName}</option>   
 		)); 
 	
 	const Checkbox = props => (
@@ -238,7 +237,7 @@ class Container extends React.Component {
 	)
 			
     return (    
-	            <section id="yourProfile" style={{backgroundColor:'black'}} class="wrapper style2 spotlights">
+	            <section id="yourAdmin" style={{backgroundColor:'black'}} class="wrapper style2 spotlights">
                 <div class="inner">    
 				<div id="waitDiv2" align="center" style={{zIndex:10000}}>
 					<img id='waitImg2' alt="Wait" src={waitImg} class='ajax-loader'  style={{zIndex:10000,position: 'absolute',left: 0,top: 0,right: 0,bottom: 0,margin: 'auto'}}/>

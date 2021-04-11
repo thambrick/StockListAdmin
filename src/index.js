@@ -5,7 +5,6 @@ import './main.css';
 import waitImg from './wait.gif';
 
 var userId;
-var userIdLoggedIn;
 var email;
 //var color;
 //var userImage;
@@ -66,13 +65,13 @@ class Container extends React.Component {
 	let params = window.location.search;
 	//alert(params);
 	
-	userIdLoggedIn = params.replace("?userid=", "");
+	userId = params.replace("?userid=", "");
 	
 	//alert(userId);
 	
-	userIdLoggedIn = userId.substring(0,userIdLoggedIn.search("&color="));
+	userId = userId.substring(0,userId.search("&color="));
 	
-	alert(userIdLoggedIn);
+	//alert(userId);
 	
 	//color = "backgroundColor:'"+params.replace("?userid="+userId+"&color=", "")+"'";
 	//alert(color);	 
@@ -188,14 +187,14 @@ class Container extends React.Component {
 
     updateProfile = () => {
 		if ((!userId)||(userId==="")){ 
-		   alert("you must login before editing user profiles"); 
+		   alert("You must login before editing user profiles"); 
 		   return false;
 		   }
 		wait('on');
 		try {
 			//let userId = document.cookie.replace(/(?:(?:^|.*;\s*)userId\s*\=\s*([^;]*).*$)|^.*$/, "$1"); 
 			let userId = document.getElementById("userId").innerHTML;
-			//alert(userId);
+			alert(userId);
 			let email = document.getElementById("email").value;
 			let city = document.getElementById("city").value;
 			let displayName = document.getElementById("displayName").value;

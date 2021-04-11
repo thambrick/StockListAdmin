@@ -7,6 +7,8 @@ import waitImg from './wait.gif';
 var userId;
 var email;
 //var color;
+//var userImage;
+
 var admin="false";
 var selectedUser;
 
@@ -119,12 +121,15 @@ class Container extends React.Component {
             fetch("https://0pc218tpdc.execute-api.us-west-2.amazonaws.com/dev", requestOptions)
              .then(response => response.text())
              .then(result => this.setGetUserData(JSON.parse(result).body))
-            .catch(error => alert(JSON.parse(error).body));
+            //.catch(error => alert(JSON.parse(error).body));
+			.catch(error => alert(error));
+
         }
 		
 
     setGetUserData(oneUserData){
-			//alert("setGetUserData===");			
+			//alert("setGetUserData===");
+			//alert(oneUserData);
 			oneUserData = JSON.parse(oneUserData);
 			selectedUser=oneUserData.Items[0].userId;
 			admin=oneUserData.Items[0].admin;
@@ -139,6 +144,11 @@ class Container extends React.Component {
 			document.getElementById("displayName").value=oneUserData.Items[0].displayName;
 			document.getElementById("city").value=oneUserData.Items[0].city;
 			document.getElementById("userId").innerHTML=oneUserData.Items[0].userId;
+			document.getElementById("userImage").value=oneUserData.Items[0].userImage;
+			document.getElementById("color").value=oneUserData.Items[0].color;
+
+            //alert(document.getElementById("userId").innerHTML)
+            //alert("11111");
 			wait('off');
 		}
 
@@ -184,14 +194,21 @@ class Container extends React.Component {
 		wait('on');
 		try {
 			//let userId = document.cookie.replace(/(?:(?:^|.*;\s*)userId\s*\=\s*([^;]*).*$)|^.*$/, "$1"); 
-			let userId = document.getElementById("userId").value;
+			let userId = document.getElementById("userId").innerHTML;
 			//alert(userId);
 			let email = document.getElementById("email").value;
 			let city = document.getElementById("city").value;
 			let displayName = document.getElementById("displayName").value;
+			
+			let userImage = document.getElementById("userImage").value;
+			let color = document.getElementById("color").value;
+			
             var myHeaders = new Headers();
             myHeaders.append("Content-Type", "application/json");
-            var raw = JSON.stringify({"userId":userId,"email":email,"displayName":displayName,"city":city,"admin":admin});
+            //var raw = JSON.stringify({"userId":userId,"email":email,"displayName":displayName,"city":city,"admin":admin});
+			//var raw = JSON.stringify({"userId":userId,"email":email,"displayName":displayName,"city":city,"admin":admin,"userImage":userImage,"color":color });
+            var raw = JSON.stringify({"userId":userId,"email":email,"displayName":displayName,"city":city,"admin":admin,"userImage":userImage,"color":color });
+           
 			//alert("444");alert(raw);
             var requestOptions = {
                 method: 'POST',
@@ -200,8 +217,10 @@ class Container extends React.Component {
                 redirect: 'follow'
             };
 			fetch("https://u3yyrwv2r5.execute-api.us-west-2.amazonaws.com/dev", requestOptions)
-             .then(response => response.text())
-			 .then(result => {alert(JSON.parse(result).body);wait('off');})
+            .then(response => response.text())
+             //.then(result => document.getElementById('getDataInputLabel').innerHTML=JSON.parse(result).body)
+            .then(result => {alert(JSON.parse(result).body);wait('off')})
+			//.then(result => alert(JSON.parse(result).body))
             .catch(error => alert(JSON.parse(error).body));
 		} catch (error) {
 			//console.error(error);
@@ -254,7 +273,10 @@ class Container extends React.Component {
                 </td>
                 </tr>
 				<tr><td align='right' style={{width:'36%'}}><label>City</label></td><td><input style={{color:'rgba(25, 25, 25, 5)',width:'215px'}} id='city' onchange={this.handleChange}/></td></tr>
-                <tr><td align='right' style={{width:'36%'}}><label>Email</label></td><td><input style={{color:'rgba(25, 25, 25, 5)',width:'215px'}} defaultValue={email} id='email' onchange={this.handleChange}/></td></tr>
+                
+				<tr><td align='right' style={{width:'36%'}}><label>Color</label></td><td><input style={{color:'rgba(25, 25, 25, 5)',width:'215px'}} id='color' onchange={this.handleChange}/></td></tr>
+				<tr><td align='right' style={{width:'36%'}}><label>userImage</label></td><td><input style={{color:'rgba(25, 25, 25, 5)',width:'215px'}} id='userImage' onchange={this.handleChange}/></td></tr>
+				<tr><td align='right' style={{width:'36%'}}><label>Email</label></td><td><input style={{color:'rgba(25, 25, 25, 5)',width:'215px'}} defaultValue={email} id='email' onchange={this.handleChange}/></td></tr>
 			    <tr><td align='right' style={{width:'36%',}}><label>ID</label></td><td><label id='userId'></label></td></tr>
 			    
 				<tr><td align='right'style={{width:'36%',textAlignVertical:'top',color:'rgba(25, 25, 25, 5)'}}><label>Admin</label></td><td>		

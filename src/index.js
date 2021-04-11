@@ -61,15 +61,14 @@ class Container extends React.Component {
 	//"https://www.stocklistsite.com?userid=" + userId + "&color="+color;
 			  	  
 	let params = window.location.search;
-	//alert(params);
+	alert(params);
 	userId = params.replace("?userid=", "");
-	//alert(userId);
+	alert(userId);
 	userId = userId.substring(0,userId.search("&color="));
-	
+	alert(userId);
 	//color = "backgroundColor:'"+params.replace("?userid="+userId+"&color=", "")+"'";
 	//alert(color);	 
-		 
-	
+
 	this.state = {values: []};
 	    //window.location="https://www.stocklistnow.com/";
     }

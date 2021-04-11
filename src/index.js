@@ -59,7 +59,7 @@ class Container extends React.Component {
 
 	//document.getElementById('StockListAdmin').src=
 	//"https://www.stocklistsite.com?userid=" + userId + "&color="+color;
-			  	  
+	//?userid=thambrick&color=red		  	  
 	let params = window.location.search;
 	alert(params);
 	userId = params.replace("?userid=", "");
@@ -218,6 +218,7 @@ class Container extends React.Component {
 		this.setState({selectedValue: e.target.value})
 		this.CallGetUserAPI(e.target.value); 
 		//class="wrapper style2 spotlights"
+		//    <section id="yourProfile" style={{backgroundColor:'black'}} class="wrapper style2 spotlights">
 	  }
 	 
 	render() {
@@ -231,7 +232,7 @@ class Container extends React.Component {
 	)
 			
     return (    
-	            <section id="yourProfile" style={{backgroundColor:'black'}} class="wrapper style2 spotlights">
+	            <section id="yourProfile" >
                 <div class="inner">    
 				<div id="waitDiv2" align="center" style={{zIndex:10000}}>
 					<img id='waitImg2' alt="Wait" src={waitImg} class='ajax-loader'  style={{zIndex:10000,position: 'absolute',left: 0,top: 0,right: 0,bottom: 0,margin: 'auto'}}/>

@@ -70,7 +70,7 @@ class Container extends React.Component {
 	userId = userId.substring(0,userId.search("&color="));
 	
 	
-	alert(userId);
+	//alert(userId);
 	
 	//color = "backgroundColor:'"+params.replace("?userid="+userId+"&color=", "")+"'";
 	//alert(color);	 
@@ -238,7 +238,7 @@ class Container extends React.Component {
 	)
 			
     return (    
-	            <section id="yourProfile" >
+	            <section id="yourProfile" style={{backgroundColor:'black'}} class="wrapper style2 spotlights">
                 <div class="inner">    
 				<div id="waitDiv2" align="center" style={{zIndex:10000}}>
 					<img id='waitImg2' alt="Wait" src={waitImg} class='ajax-loader'  style={{zIndex:10000,position: 'absolute',left: 0,top: 0,right: 0,bottom: 0,margin: 'auto'}}/>

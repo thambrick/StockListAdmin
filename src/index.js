@@ -194,7 +194,7 @@ class Container extends React.Component {
 		try {
 			//let userId = document.cookie.replace(/(?:(?:^|.*;\s*)userId\s*\=\s*([^;]*).*$)|^.*$/, "$1"); 
 			let userId = document.getElementById("userId").innerHTML;
-			alert(userId);
+			//alert(userId);
 			let email = document.getElementById("email").value;
 			let city = document.getElementById("city").value;
 			let displayName = document.getElementById("displayName").value;

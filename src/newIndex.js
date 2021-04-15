@@ -6,7 +6,7 @@ import waitImg from './wait.gif';
 
 var userId;
 var email;
-//var color;
+var userIdTop;
 //var userImage;
 
 var admin="false";
@@ -65,12 +65,13 @@ class Container extends React.Component {
 	let params = window.location.search;
 	//alert(params);
 	
-	userId = params.replace("?userid=", "");
+	userIdTop = params.replace("?userid=", "");
+	//?userId=thambrick4
+	//alert(userIdTop);
 	
-	//alert(userId);
-	
-	userId = userId.substring(0,userId.search("&color="));
-	
+	userIdTop = userIdTop.substring(0,userIdTop.search("&color="));
+	//alert(userIdTop);
+	userId=userIdTop;
 	//alert(userId);
 	
 	//color = "backgroundColor:'"+params.replace("?userid="+userId+"&color=", "")+"'";
@@ -84,7 +85,7 @@ class Container extends React.Component {
 		this.UserList();
     }
 
-    CallDeleteUserAPI = (userId)=>{
+    CallDeleteUserAPI___OLD = (userId)=>{
             var myHeaders = new Headers();
             myHeaders.append("Content-Type", "application/json");
             var raw = JSON.stringify({"userId":userId});
@@ -98,6 +99,29 @@ class Container extends React.Component {
             fetch("https://dh3d04lkq3.execute-api.us-west-2.amazonaws.com/dev", requestOptions)
              .then(response => response.text())
              .then(result => this.setDelUserData(JSON.parse(result).body))
+            .catch(error => alert(JSON.parse(error).body));
+        }
+		
+		
+    callUpdateUserAPI = (userId, email, displayName, city, admin, userImage, screen, deleteUser)=>{
+	        if (!admin)admin="false";
+
+            var myHeaders = new Headers();
+            myHeaders.append("Content-Type", "application/json");
+            var raw = JSON.stringify({"userId":userId,"email":email,"displayName":displayName,"city":city,"admin":admin,"userImage":userImage,"screen":screen,"deleteUser":deleteUser });
+            var requestOptions = {
+                method: 'POST',
+                headers: myHeaders,
+                body: raw,
+                redirect: 'follow'
+            };
+			alert("NEW callUpdateUserAPI......");alert(raw);
+            fetch("https://61r499x9jc.execute-api.us-west-2.amazonaws.com/dev", requestOptions)
+            .then(response => response.text())
+             //.then(result => document.getElementById('getDataInputLabel').innerHTML=JSON.parse(result).body)
+            //.then(result => setUpdateUserData(JSON.parse(result).body,raw))
+			.then(result => this.setDelUserData(JSON.parse(result).body))
+			//.then(result => alert(JSON.parse(result).body))
             .catch(error => alert(JSON.parse(error).body));
         }
 	
@@ -116,7 +140,7 @@ class Container extends React.Component {
                 body: raw,
                 redirect: 'follow'
             };
-			//alert("222");alert(raw);
+			//alert("222");alert(raw);//NEW
             fetch("https://0pc218tpdc.execute-api.us-west-2.amazonaws.com/dev", requestOptions)
              .then(response => response.text())
              .then(result => this.setGetUserData(JSON.parse(result).body))
@@ -127,8 +151,8 @@ class Container extends React.Component {
 		
 
     setGetUserData(oneUserData){
-			//alert("setGetUserData===");
-			//alert(oneUserData);
+			alert("setGetUserData===");
+			alert(oneUserData);
 			oneUserData = JSON.parse(oneUserData);
 			selectedUser=oneUserData.Items[0].userId;
 			admin=oneUserData.Items[0].admin;
@@ -144,7 +168,7 @@ class Container extends React.Component {
 			document.getElementById("city").value=oneUserData.Items[0].city;
 			document.getElementById("userId").innerHTML=oneUserData.Items[0].userId;
 			document.getElementById("userImage").value=oneUserData.Items[0].userImage;
-			document.getElementById("color").value=oneUserData.Items[0].color;
+			document.getElementById("screen").value=oneUserData.Items[0].screen;
 
             //alert(document.getElementById("userId").innerHTML)
             //alert("11111");
@@ -161,18 +185,26 @@ class Container extends React.Component {
             body: raw,
             redirect: 'follow'
             };
-            fetch("https://ohqt9x52g9.execute-api.us-west-2.amazonaws.com/dev", requestOptions)
+			alert(raw)
+            fetch("https://2oyvb32mlh.execute-api.us-west-2.amazonaws.com/dev", requestOptions)
              .then(response => response.text())
-			 .then(result => this.setStateNow(JSON.parse(result).body))
+			 .then(result => this.setStateNow(result))
             .catch(error => alert(JSON.parse(error).body));
     }
 
     setStateNow(userData){
-        userData = userData.replace("Items", "values",1);
-		if (userData.search("\"Count\":0,")!==-1) {		
+		//alert("setStateNow")
+		//alert(userData)
+		//alert(userData.count)
+		//alert(userData.length)
+        //userData = userData.replace("Items", "values",1);
+		//if (userData.search("\"Count\":0,")!==-1) {	
+        if (userData.length===2) {	
+            alert("You must login first")		
 		    wait('off');
 		} else {		
 		   userData = JSON.parse(userData);
+		   ///alert(userData.values[0].userId)
 		   this.CallGetUserAPI(userData.values[0].userId);
     	   this.setState(userData);
 		} 
@@ -181,15 +213,16 @@ class Container extends React.Component {
 	deleteProfile = () => {
 		if (window.confirm('Comfirm delete user?')) {
 			wait('on');
-			this.CallDeleteUserAPI(selectedUser); 
+			//this.CallDeleteUserAPI(selectedUser); 
+			this.callUpdateUserAPI(selectedUser,"","","","","","","delete"); 
 		}
 	}
 
     updateProfile = () => {
-		if ((!userId)||(userId==="")){ 
-		   alert("You must login before editing user profiles"); 
-		   return false;
-		   }
+		//if ((!userIdTop)||(userIdTop==="")){ 
+		//   alert("You must login before editing user profiles"); 
+		//   return false;
+		//   }
 		wait('on');
 		try {
 			//let userId = document.cookie.replace(/(?:(?:^|.*;\s*)userId\s*\=\s*([^;]*).*$)|^.*$/, "$1"); 
@@ -200,13 +233,13 @@ class Container extends React.Component {
 			let displayName = document.getElementById("displayName").value;
 			
 			let userImage = document.getElementById("userImage").value;
-			let color = document.getElementById("color").value;
+			let screen = document.getElementById("screen").value;
 			
             var myHeaders = new Headers();
             myHeaders.append("Content-Type", "application/json");
             //var raw = JSON.stringify({"userId":userId,"email":email,"displayName":displayName,"city":city,"admin":admin});
 			//var raw = JSON.stringify({"userId":userId,"email":email,"displayName":displayName,"city":city,"admin":admin,"userImage":userImage,"color":color });
-            var raw = JSON.stringify({"userId":userId,"email":email,"displayName":displayName,"city":city,"admin":admin,"userImage":userImage,"color":color });
+            var raw = JSON.stringify({"userId":userId,"email":email,"displayName":displayName,"city":city,"admin":admin,"userImage":userImage,"screen":screen });
            
 			//alert("444");alert(raw);
             var requestOptions = {
@@ -215,7 +248,8 @@ class Container extends React.Component {
                 body: raw,
                 redirect: 'follow'
             };
-			fetch("https://u3yyrwv2r5.execute-api.us-west-2.amazonaws.com/dev", requestOptions)
+			fetch("https://61r499x9jc.execute-api.us-west-2.amazonaws.com/dev", requestOptions)
+			//fetch("https://u3yyrwv2r5.execute-api.us-west-2.amazonaws.com/dev", requestOptions)
             .then(response => response.text())
              //.then(result => document.getElementById('getDataInputLabel').innerHTML=JSON.parse(result).body)
             .then(result => {alert(JSON.parse(result).body);wait('off')})
@@ -273,7 +307,7 @@ class Container extends React.Component {
                 </tr>
 				<tr><td align='right' style={{width:'33%'}}><label>City</label></td><td><input style={{color:'rgba(25, 25, 25, 5)',width:'212px'}} id='city' onchange={this.handleChange}/></td></tr>
                 
-				<tr><td align='right' style={{width:'33%'}}><label>Color</label></td><td><input style={{color:'rgba(25, 25, 25, 5)',width:'212px'}} id='color' onchange={this.handleChange}/></td></tr>
+				<tr><td align='right' style={{width:'33%'}}><label>Screen</label></td><td><input style={{color:'rgba(25, 25, 25, 5)',width:'212px'}} id='screen' onchange={this.handleChange}/></td></tr>
 				<tr><td align='right' style={{width:'33%'}}><label>Image</label></td><td><input style={{color:'rgba(25, 25, 25, 5)',width:'212px'}} id='userImage' onchange={this.handleChange}/></td></tr>
 				<tr><td align='right' style={{width:'33%'}}><label>Email</label></td><td><input style={{color:'rgba(25, 25, 25, 5)',width:'212px'}} defaultValue={email} id='email' onchange={this.handleChange}/></td></tr>
 			    <tr><td align='right' style={{width:'33%',}}><label>ID</label></td><td><label id='userId'></label></td></tr>

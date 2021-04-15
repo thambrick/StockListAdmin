@@ -66,10 +66,11 @@ class Container extends React.Component {
 	//alert(params);
 	
 	userIdTop = params.replace("?userid=", "");
-	
-	alert(userIdTop);
+	//?userId=thambrick4
+	//alert(userIdTop);
 	
 	userIdTop = userIdTop.substring(0,userIdTop.search("&color="));
+	//alert(userIdTop);
 	userId=userIdTop;
 	//alert(userId);
 	
@@ -81,7 +82,7 @@ class Container extends React.Component {
     }
   
     componentDidMount() {
-		this.UserList();
+		this.UserList(userId);
     }
 
     CallDeleteUserAPI___OLD = (userId)=>{
@@ -126,7 +127,7 @@ class Container extends React.Component {
 	
     setDelUserData(oneUserData){
         alert(oneUserData);
-		this.UserList();
+		this.UserList(userId);
     }	   
   
     CallGetUserAPI = (userId)=>{
@@ -174,7 +175,7 @@ class Container extends React.Component {
 			wait('off');
 		}
 
-    UserList() {
+    UserList(userId) {
         var myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/json");
         var raw = JSON.stringify({"userId":userId});
@@ -184,6 +185,7 @@ class Container extends React.Component {
             body: raw,
             redirect: 'follow'
             };
+			alert(raw)
             fetch("https://2oyvb32mlh.execute-api.us-west-2.amazonaws.com/dev", requestOptions)
              .then(response => response.text())
 			 .then(result => this.setStateNow(result))
@@ -191,16 +193,18 @@ class Container extends React.Component {
     }
 
     setStateNow(userData){
-		alert(userData)
-		alert(userData.count)
-		alert(userData.length)
+		//alert("setStateNow")
+		//alert(userData)
+		//alert(userData.count)
+		//alert(userData.length)
         //userData = userData.replace("Items", "values",1);
 		//if (userData.search("\"Count\":0,")!==-1) {	
-        if (userData.length===0) {			
+        if (userData.length===2) {	
+            alert("You must login first")		
 		    wait('off');
 		} else {		
 		   userData = JSON.parse(userData);
-		   alert(userData.values[0].userId)
+		   //alert(userData.values[0].userId)
 		   this.CallGetUserAPI(userData.values[0].userId);
     	   this.setState(userData);
 		} 
@@ -215,10 +219,10 @@ class Container extends React.Component {
 	}
 
     updateProfile = () => {
-		if ((!userIdTop)||(userIdTop==="")){ 
-		   alert("You must login before editing user profiles"); 
-		   return false;
-		   }
+		//if ((!userIdTop)||(userIdTop==="")){ 
+		//   alert("You must login before editing user profiles"); 
+		//   return false;
+		//   }
 		wait('on');
 		try {
 			//let userId = document.cookie.replace(/(?:(?:^|.*;\s*)userId\s*\=\s*([^;]*).*$)|^.*$/, "$1"); 

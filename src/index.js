@@ -184,9 +184,9 @@ class Container extends React.Component {
             body: raw,
             redirect: 'follow'
             };
-            fetch("https://0pc218tpdc.execute-api.us-west-2.amazonaws.com/dev", requestOptions)
+            fetch("https://2oyvb32mlh.execute-api.us-west-2.amazonaws.com/dev", requestOptions)
              .then(response => response.text())
-			 .then(result => this.setStateNow(JSON.parse(result).body))
+			 .then(result => this.setStateNow(result))
             .catch(error => alert(JSON.parse(error).body));
     }
 
@@ -196,7 +196,7 @@ class Container extends React.Component {
 		alert(userData.length)
         //userData = userData.replace("Items", "values",1);
 		//if (userData.search("\"Count\":0,")!==-1) {	
-        if (userData.length==0) {			
+        if (userData.length===0) {			
 		    wait('off');
 		} else {		
 		   userData = JSON.parse(userData);

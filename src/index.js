@@ -70,7 +70,7 @@ class Container extends React.Component {
 	alert(userIdTop);
 	
 	userIdTop = userIdTop.substring(0,userIdTop.search("&color="));
-	
+	userId=userIdTop;
 	//alert(userId);
 	
 	//color = "backgroundColor:'"+params.replace("?userid="+userId+"&color=", "")+"'";
@@ -184,18 +184,23 @@ class Container extends React.Component {
             body: raw,
             redirect: 'follow'
             };
-            fetch("https://ohqt9x52g9.execute-api.us-west-2.amazonaws.com/dev", requestOptions)
+            fetch("https://0pc218tpdc.execute-api.us-west-2.amazonaws.com/dev", requestOptions)
              .then(response => response.text())
 			 .then(result => this.setStateNow(JSON.parse(result).body))
             .catch(error => alert(JSON.parse(error).body));
     }
 
     setStateNow(userData){
-        userData = userData.replace("Items", "values",1);
-		if (userData.search("\"Count\":0,")!==-1) {		
+		alert(userData)
+		alert(userData.count)
+		alert(userData.length)
+        //userData = userData.replace("Items", "values",1);
+		//if (userData.search("\"Count\":0,")!==-1) {	
+        if (userData.length==0) {			
 		    wait('off');
 		} else {		
 		   userData = JSON.parse(userData);
+		   alert(userData.values[0].userId)
 		   this.CallGetUserAPI(userData.values[0].userId);
     	   this.setState(userData);
 		} 

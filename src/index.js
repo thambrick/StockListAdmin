@@ -4,44 +4,14 @@ import ReactDOM from 'react-dom';
 import './main.css';
 import waitImg from './wait.gif';
 
-var userId;
+//var userId;
 var email;
-var userIdTop;
+//var userIdTop;
 //var userImage;
 
 var admin="false";
 var selectedUser;
 
-
-	//window.refreshFunction = function(){
-	//	alert("test123 userId=");
-		//alert(userId);
-		//this.UserList();
-	//} 
-
-        //function closeWindow2() 
-        //{
-            //alert("in closeWindow2");
-			//parent.adminScreen();
-        //}
-		
-//window.addEventListener('message', function(event) {
-//      alert("addEventListener");
-//	  alert(event.data);
-//	  window.location.reload(false);
-	  //
-    // IMPORTANT: Check the origin of the data!
- //   if (event.origin.indexOf('http://yoursite.com')) {
-        // The data has been sent from your site
-
-        // The data sent with postMessage is stored in event.data
- //       console.log(event.data);
- //   } else {
-        // The data hasn't been sent from your site!
-        // Be careful! Do not use it.
- //       return;
- //   }
-//});
 
 function wait(onOff){
 	       //alert(onOff);
@@ -62,150 +32,143 @@ class Container extends React.Component {
 	//document.getElementById('StockListAdmin').src=
 	//"https://www.stocklistsite.com?userid=" + userId + "&color="+color;
 	//?userid=thambrick&color=red		  	  
-	let params = window.location.search;
+	//let params = window.location.search;
 	//alert(params);
-	
-	userIdTop = params.replace("?userid=", "");
-	//?userId=thambrick4
-	//alert(userIdTop);
-	
-	userIdTop = userIdTop.substring(0,userIdTop.search("&color="));
-	//alert(userIdTop);
-	userId=userIdTop;
-	alert(userId);
-	
-	//color = "backgroundColor:'"+params.replace("?userid="+userId+"&color=", "")+"'";
-	//alert(color);	 
 
 	this.state = {values: []};
 	    //window.location="https://www.stocklistnow.com/";
     }
   
     componentDidMount() {
-		this.UserList();
+		
+	    //let userId = window.location.search;
+	    //userId = userId.replace("?userid=", "");
+	    ///alert(userId);
+		this.UserList("");
     }
 
-    CallDeleteUserAPI___OLD = (userId)=>{
-            var myHeaders = new Headers();
-            myHeaders.append("Content-Type", "application/json");
-            var raw = JSON.stringify({"userId":userId});
-            var requestOptions = {
-                method: 'POST',
-                headers: myHeaders,
-                body: raw,
-                redirect: 'follow'
-            };
-			//alert("222");alert(raw);
-            fetch("https://dh3d04lkq3.execute-api.us-west-2.amazonaws.com/dev", requestOptions)
-             .then(response => response.text())
-             .then(result => this.setDelUserData(JSON.parse(result).body))
-            .catch(error => alert(JSON.parse(error).body));
-        }
-		
 		
     callUpdateUserAPI = (userId, email, displayName, city, admin, userImage, screen, deleteUser)=>{
-	        if (!admin)admin="false";
-
-            var myHeaders = new Headers();
-            myHeaders.append("Content-Type", "application/json");
-            var raw = JSON.stringify({"userId":userId,"email":email,"displayName":displayName,"city":city,"admin":admin,"userImage":userImage,"screen":screen,"deleteUser":deleteUser });
-            var requestOptions = {
-                method: 'POST',
-                headers: myHeaders,
-                body: raw,
-                redirect: 'follow'
-            };
-			alert("NEW callUpdateUserAPI......");alert(raw);
-            fetch("https://61r499x9jc.execute-api.us-west-2.amazonaws.com/dev", requestOptions)
-            .then(response => response.text())
-             //.then(result => document.getElementById('getDataInputLabel').innerHTML=JSON.parse(result).body)
-            //.then(result => setUpdateUserData(JSON.parse(result).body,raw))
+		if (!admin)admin="false";
+		let userIdv = window.location.search;
+		userIdv = userIdv.replace("?userid=", "");
+		if (userIdv===userId) {
+			  alert("You cant delete yourself")
+			  wait('off');
+		} else {
+			var myHeaders = new Headers();
+			myHeaders.append("Content-Type", "application/json");
+			var raw = JSON.stringify({"userId":userId,"email":email,"displayName":displayName,"city":city,"admin":admin,"userImage":userImage,"screen":screen,"deleteUser":deleteUser });
+			var requestOptions = {
+				method: 'POST',
+				headers: myHeaders,
+				body: raw,
+				redirect: 'follow'
+			};
+			//alert("NEW callUpdateUserAPI......");alert(raw);
+			fetch("https://61r499x9jc.execute-api.us-west-2.amazonaws.com/dev", requestOptions)
+			.then(response => response.text())
+			 //.then(result => document.getElementById('getDataInputLabel').innerHTML=JSON.parse(result).body)
+			//.then(result => setUpdateUserData(JSON.parse(result).body,raw))
 			.then(result => this.setDelUserData(JSON.parse(result).body))
 			//.then(result => alert(JSON.parse(result).body))
-            .catch(error => alert(JSON.parse(error).body));
-        }
+			.catch(error => alert(JSON.parse(error).body));
+		}	
+	}
 	
     setDelUserData(oneUserData){
-        alert(oneUserData);
-		this.UserList();
+        //alert(oneUserData);
+	    //let userId = window.location.search;
+	    //userId = userId.replace("?userid=", "");
+		//alert(userId);
+		this.UserList("");
     }	   
   
     CallGetUserAPI = (userId)=>{
-            var myHeaders = new Headers();
-            myHeaders.append("Content-Type", "application/json");
-            var raw = JSON.stringify({"userId":userId});
-            var requestOptions = {
-                method: 'POST',
-                headers: myHeaders,
-                body: raw,
-                redirect: 'follow'
-            };
-			alert("CallGetUserAPI");alert(raw);//NEW
-            fetch("https://0pc218tpdc.execute-api.us-west-2.amazonaws.com/dev", requestOptions)
-             .then(response => response.text())
-             .then(result => this.setGetUserData(JSON.parse(result).body))
-            //.catch(error => alert(JSON.parse(error).body));
-			.catch(error => alert(error));
-
-        }
-		
-
-    setGetUserData(oneUserData){
-			alert("setGetUserData===");
-			alert(oneUserData);
-			oneUserData = JSON.parse(oneUserData);
-			selectedUser=oneUserData.Items[0].userId;
-			admin=oneUserData.Items[0].admin;
-		    if (admin==="true"){
-			   admin="true";
-			   this.setState({ checked: true })
-			} else {
-			   admin="false";
-			   this.setState({ checked: false })
-			}   
-			document.getElementById("email").value=oneUserData.Items[0].email;
-			document.getElementById("displayName").value=oneUserData.Items[0].displayName;
-			document.getElementById("city").value=oneUserData.Items[0].city;
-			document.getElementById("userId").innerHTML=oneUserData.Items[0].userId;
-			document.getElementById("userImage").value=oneUserData.Items[0].userImage;
-			document.getElementById("screen").value=oneUserData.Items[0].screen;
-
-            //alert(document.getElementById("userId").innerHTML)
-            //alert("11111");
-			wait('off');
-		}
-
-    UserList() {
-        var myHeaders = new Headers();
+		var myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/json");
-        var raw = JSON.stringify({"userId":userId});
+        var raw = JSON.stringify({"userId":userId});  //get one user, again
         var requestOptions = {
             method: 'POST',
             headers: myHeaders,
             body: raw,
             redirect: 'follow'
             };
-			alert(raw)
+			//alert(raw)
             fetch("https://2oyvb32mlh.execute-api.us-west-2.amazonaws.com/dev", requestOptions)
              .then(response => response.text())
-			 .then(result => this.setStateNow(result))
-            .catch(error => alert(JSON.parse(error).body));
-    }
+			 .then(result => this.setGetUserData(result))
+            .catch(error => alert(error));
+        }
+		
+
+    setGetUserData(oneUserData){
+			//alert("setGetUserData===");
+			//alert(oneUserData);
+			oneUserData = "{\"values\":" + oneUserData + "}"
+			oneUserData = JSON.parse(oneUserData);
+			selectedUser=oneUserData.values[0].userId;
+			admin=oneUserData.values[0].administrator;
+			//alert(admin);
+			if (!admin) admin="false"
+			
+		    if (admin==="true"){
+			   admin="true";
+			   this.setState({ checked: true })
+			} else {
+			   admin="false";
+			   this.setState({ checked: false })
+			}  
+			   
+			document.getElementById("email").value=oneUserData.values[0].email;
+			document.getElementById("displayName").value=oneUserData.values[0].displayName;
+			document.getElementById("city").value=oneUserData.values[0].city;
+			document.getElementById("userId").innerHTML=oneUserData.values[0].userId;
+			document.getElementById("userImage").value=oneUserData.values[0].userImage;
+			document.getElementById("screen").value=oneUserData.values[0].screen;
+
+			wait('off');
+		}
+
+
+	
+	UserList(userId) {
+        var myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+        var raw = JSON.stringify({"userId":userId});
+		//var raw2 = JSON.parse(raw)  {"userId":"thambrick4"}  this needs to change to bring back all users
+        var requestOptions = {
+            method: 'POST',
+            headers: myHeaders,
+            body: raw,
+            redirect: 'follow'
+            };
+			//alert(raw)    ///new
+            fetch("https://hpugfe4kld.execute-api.us-west-2.amazonaws.com/dev", requestOptions)
+             .then(response => response.text())
+             .then(result => this.setStateNow(result))
+			 .catch(error => alert(error));
+        }
+		
 
     setStateNow(userData){
-		//alert("setStateNow")
-		//alert(userData)
-		//alert(userData.count)
-		//alert(userData.length)
         //userData = userData.replace("Items", "values",1);
-		//if (userData.search("\"Count\":0,")!==-1) {	
-        if (userData.length===2) {	
+		userData = "{\"values\":" + userData + "}"
+		//alert(userData)
+		let userId = window.location.search;
+	    userId = userId.replace("?userid=", "");
+		//alert(userId);
+		//alert(userData);
+		//alert(userData.search("\""+userId+"\""))
+		if (userData.search("\""+userId+"\"")===-1) {	
+        //if (userData.length<5) {	
             alert("You must login first")		
 		    wait('off');
 		} else {		
 		   userData = JSON.parse(userData);
 		   ///alert(userData.values[0].userId)
 		   this.CallGetUserAPI(userData.values[0].userId);
+
     	   this.setState(userData);
 		} 
     }
@@ -219,10 +182,7 @@ class Container extends React.Component {
 	}
 
     updateProfile = () => {
-		//if ((!userIdTop)||(userIdTop==="")){ 
-		//   alert("You must login before editing user profiles"); 
-		//   return false;
-		//   }
+
 		wait('on');
 		try {
 			//let userId = document.cookie.replace(/(?:(?:^|.*;\s*)userId\s*\=\s*([^;]*).*$)|^.*$/, "$1"); 
@@ -239,9 +199,9 @@ class Container extends React.Component {
             myHeaders.append("Content-Type", "application/json");
             //var raw = JSON.stringify({"userId":userId,"email":email,"displayName":displayName,"city":city,"admin":admin});
 			//var raw = JSON.stringify({"userId":userId,"email":email,"displayName":displayName,"city":city,"admin":admin,"userImage":userImage,"color":color });
-            var raw = JSON.stringify({"userId":userId,"email":email,"displayName":displayName,"city":city,"admin":admin,"userImage":userImage,"screen":screen });
+            var raw = JSON.stringify({"userId":userId,"email":email,"displayName":displayName,"city":city,"admin":admin,"userImage":userImage,"screen":screen ,"deleteUser":"" });
            
-			//alert("444");alert(raw);
+		    //alert("444");alert(raw);
             var requestOptions = {
                 method: 'POST',
                 headers: myHeaders,
@@ -272,6 +232,7 @@ class Container extends React.Component {
 	  }
 	  
 	handleChange = (e) => {
+		//alert(e.target.value)
 		selectedUser=e.target.value;
 		this.setState({selectedValue: e.target.value})
 		this.CallGetUserAPI(e.target.value); 
